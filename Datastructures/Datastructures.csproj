@@ -56,6 +56,7 @@
     <Compile Include="DataStructures\String Manupulation\StringUtils.cs" />
     <Compile Include="DataStructures\Tries\Tries.cs" />
     <Compile Include="DataStructures\Graphs\Graphs.cs" />
+    <Compile Include="Partition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solutions.cs" />

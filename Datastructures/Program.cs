@@ -21,90 +21,94 @@ namespace Datastructures
     {
         static void Main(string[] args)
         {
-            var result = Merge(new int[] {2,3,6,0,0,0 },3, new int[] {1,4,5 },3);
-            foreach(int i in result)
-            {
-                Console.WriteLine(i);
-            }
-        }
-        public static int[] Merge(int[] nums1, int m, int[] nums2, int n)
-        {
-            var temp = new int[m];
+            var partition = new Partition();
 
-            for (var i = 0; i < m; i++) temp[i] = nums1[i];
+            int n = 10;
+            int[] nums = new int[] { 1,2,5}; // Memoization table
 
-            var idx1 = 0;
-            var idx2 = 0;
-            var pushIndex = 0;
-
-            while (idx1 < m && idx2 < n)
-            {
-                nums1[pushIndex++] = temp[idx1] < nums2[idx2] ? temp[idx1++] : nums2[idx2++];
-            }
-
-            while (idx1 < m) nums1[pushIndex++] = temp[idx1++];
-            while (idx2 < n) nums1[pushIndex++] = nums2[idx2++];
-            return nums1;
+            var result = partition.CanPartitiom(nums);
+            Console.WriteLine(result);
         }
 
-        public static int ClimbStairs(int n)
-        {
-            if (n <= 3)
-                return n;
 
-            int[] dp = new int[n + 1];
-            dp[0] = 1;
-            dp[1] = 2;
+        //public static int[] Merge(int[] nums1, int m, int[] nums2, int n)
+        //{
+        //    var temp = new int[m];
 
-            for (int i = 2; i <= n; i++)
-            {
-                dp[i] = dp[i-1] + dp[i-2];
-            }
+        //    for (var i = 0; i < m; i++) temp[i] = nums1[i];
 
-            return dp[n-1];
-        }
+        //    var idx1 = 0;
+        //    var idx2 = 0;
+        //    var pushIndex = 0;
+
+        //    while (idx1 < m && idx2 < n)
+        //    {
+        //        nums1[pushIndex++] = temp[idx1] < nums2[idx2] ? temp[idx1++] : nums2[idx2++];
+        //    }
+
+        //    while (idx1 < m) nums1[pushIndex++] = temp[idx1++];
+        //    while (idx2 < n) nums1[pushIndex++] = nums2[idx2++];
+        //    return nums1;
+        //}
+
+        //public static int ClimbStairs(int n)
+        //{
+        //    if (n <= 3)
+        //        return n;
+
+        //    int[] dp = new int[n + 1];
+        //    dp[0] = 1;
+        //    dp[1] = 2;
+
+        //    for (int i = 2; i <= n; i++)
+        //    {
+        //        dp[i] = dp[i-1] + dp[i-2];
+        //    }
+
+        //    return dp[n-1];
+        //}
 
     }
 //least memory space
-public class Solution1
-{
-    public string AddBinary(string a, string b)
-    {
-        var ls = new List<int>();
+//public class Solution1
+//{
+//    public string AddBinary(string a, string b)
+//    {
+//        var ls = new List<int>();
 
-        for (int i = a.Length - 1, j = b.Length - 1, remainder = 0; i >= 0 || j >= 0 || remainder > 0;)
-        {
-            var firstDigit = i >= 0 ? a[i--] - '0' : 0;
-            var secondDigit = j >= 0 ? b[j--] - '0' : 0;
-            ls.Add(firstDigit ^ secondDigit ^ remainder);
-            remainder = ((firstDigit | secondDigit) & remainder) | (firstDigit & secondDigit);
-        }
-        GC.Collect();
-        ls.Reverse();
-        return string.Concat(ls);
-    }
+//        for (int i = a.Length - 1, j = b.Length - 1, remainder = 0; i >= 0 || j >= 0 || remainder > 0;)
+//        {
+//            var firstDigit = i >= 0 ? a[i--] - '0' : 0;
+//            var secondDigit = j >= 0 ? b[j--] - '0' : 0;
+//            ls.Add(firstDigit ^ secondDigit ^ remainder);
+//            remainder = ((firstDigit | secondDigit) & remainder) | (firstDigit & secondDigit);
+//        }
+//        GC.Collect();
+//        ls.Reverse();
+//        return string.Concat(ls);
+//    }
         //highest speed
-        public static string AddBinaryFastest(string a, string b)
-        {
-            char[] A = (new string('0', Math.Max(a.Length, b.Length) + 1 - a.Length) + a).ToCharArray();
+    //    public static string AddBinaryFastest(string a, string b)
+    //    {
+    //        char[] A = (new string('0', Math.Max(a.Length, b.Length) + 1 - a.Length) + a).ToCharArray();
 
-            int cy = 0;
-            int ia = A.Length - 1;
-            int ib = b.Length - 1;
-            for (; ib >= 0 || cy != 0; ia--, ib--)
-            {
-                int p = (A[ia] - '0') + cy + (ib >= 0 ? b[ib] - '0' : 0);
+    //        int cy = 0;
+    //        int ia = A.Length - 1;
+    //        int ib = b.Length - 1;
+    //        for (; ib >= 0 || cy != 0; ia--, ib--)
+    //        {
+    //            int p = (A[ia] - '0') + cy + (ib >= 0 ? b[ib] - '0' : 0);
 
-                A[ia] = (char)((p & 1) + '0');
+    //            A[ia] = (char)((p & 1) + '0');
 
-                cy = (p & 2) >> 1;
-            }
+    //            cy = (p & 2) >> 1;
+    //        }
 
-            string res = A[0] == '0'
-                ? new string(A, 1, A.Length - 1)
-                : new string(A);
-            return res;
-        }
+    //        string res = A[0] == '0'
+    //            ? new string(A, 1, A.Length - 1)
+    //            : new string(A);
+    //        return res;
+    //    }
 
-    }
+    //}
 }
